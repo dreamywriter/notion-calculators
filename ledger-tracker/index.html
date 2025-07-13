@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running Ledger</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    input, select { width: 100%; padding: 8px; margin: 4px 0; }
+    button { padding: 10px 20px; margin-top: 10px; width: 100%; }
+    ul { padding-left: 20px; }
+    li { margin: 5px 0; }
+    h2 { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Running Ledger</h1>
+  <select id="entryType">
+    <option value="income">Income</option>
+    <option value="expense">Expense</option>
+  </select>
+  <input id="amountInput" type="number" placeholder="Enter amount">
+  <button onclick="addEntry()">Add Entry</button>
+  <h2>Balance: <span id="balance">0.00</span></h2>
+  <ul id="entryList"></ul>
+
+  <script>
+    let balance = 0;
+
+    function addEntry() {
+      const type = document.getElementById("entryType").value;
+      const val = parseFloat(document.getElementById("amountInput").value);
+      if (!isNaN(val)) {
+        const change = type === "income" ? val : -val;
+        balance += change;
+        const entryText = \`\${type === "income" ? "+" : "-"}$\${val.toFixed(2)} → Balance: $\${balance.toFixed(2)}\`;
+        const li = document.createElement("li");
+        li.innerText = entryText;
+        document.getElementById("entryList").appendChild(li);
+        document.getElementById("balance").innerText = balance.toFixed(2);
+      }
+      document.getElementById("amountInput").value = "";
+    }
+  </script>
+</body>
+</html>
