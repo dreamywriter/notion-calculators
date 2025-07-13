@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Income vs Expense</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    input { width: 100%; padding: 8px; margin: 4px 0; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .flex { display: flex; gap: 10px; }
+    .section { flex: 1; }
+    h2 { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Income & Expense Tracker</h1>
+  <div class="flex">
+    <div class="section">
+      <h2>Income</h2>
+      <input id="incomeInput" type="number" placeholder="Enter income amount">
+      <button onclick="addIncome()">Add Income</button>
+      <ul id="incomeList"></ul>
+    </div>
+    <div class="section">
+      <h2>Expenses</h2>
+      <input id="expenseInput" type="number" placeholder="Enter expense amount">
+      <button onclick="addExpense()">Add Expense</button>
+      <ul id="expenseList"></ul>
+    </div>
+  </div>
+  <h2>Net Total: <span id="netTotal">0</span></h2>
+
+  <script>
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    function addIncome() {
+      const val = parseFloat(document.getElementById("incomeInput").value);
+      if (!isNaN(val)) {
+        totalIncome += val;
+        document.getElementById("incomeList").innerHTML += `<li>$${val.toFixed(2)}</li>`;
+        updateNet();
+      }
+      document.getElementById("incomeInput").value = "";
+    }
+
+    function addExpense() {
+      const val = parseFloat(document.getElementById("expenseInput").value);
+      if (!isNaN(val)) {
+        totalExpense += val;
+        document.getElementById("expenseList").innerHTML += `<li>$${val.toFixed(2)}</li>`;
+        updateNet();
+      }
+      document.getElementById("expenseInput").value = "";
+    }
+
+    function updateNet() {
+      const net = totalIncome - totalExpense;
+      document.getElementById("netTotal").innerText = `$${net.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
