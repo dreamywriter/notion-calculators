@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #result { width: 100%; padding: 10px; margin-bottom: 10px; font-size: 1.5em; }
+    button { width: 25%; padding: 20px; font-size: 1.2em; }
+    .row { display: flex; }
+  </style>
+</head>
+<body>
+  <input type="text" id="result" readonly>
+  <div class="row">
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button onclick="press('/')">÷</button>
+  </div>
+  <div class="row">
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button onclick="press('*')">×</button>
+  </div>
+  <div class="row">
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button onclick="press('-')">−</button>
+  </div>
+  <div class="row">
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="press('+')">+</button>
+  </div>
+  <div class="row">
+    <button onclick="clearResult()" style="width: 100%">Clear</button>
+  </div>
+
+  <script>
+    let result = document.getElementById("result");
+    function press(value) {
+      result.value += value;
+    }
+    function calculate() {
+      try {
+        result.value = eval(result.value);
+      } catch {
+        result.value = "Error";
+      }
+    }
+    function clearResult() {
+      result.value = "";
+    }
+  </script>
+</body>
+</html>
