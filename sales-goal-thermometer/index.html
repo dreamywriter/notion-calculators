@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Goal Tracker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+    }
+    .thermometer {
+      position: relative;
+      width: 40px;
+      height: 300px;
+      border: 3px solid black;
+      border-radius: 20px;
+      background-color: #f1f1f1;
+      overflow: hidden;
+    }
+    .fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #4caf50;
+      transition: height 0.3s ease-in-out;
+    }
+    .goals {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 300px;
+      align-items: flex-start;
+    }
+    .goals span {
+      font-weight: bold;
+    }
+    input {
+      margin-top: 20px;
+      padding: 8px;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      padding: 8px 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sales Goal Tracker</h1>
+  <div class="container">
+    <div class="thermometer">
+      <div id="fill" class="fill" style="height: 0%"></div>
+    </div>
+    <div class="goals">
+      <span>100%</span>
+      <span>90%</span>
+      <span>80%</span>
+      <span>70%</span>
+      <span>60%</span>
+      <span>50%</span>
+      <span>40%</span>
+      <span>30%</span>
+      <span>20%</span>
+      <span>10%</span>
+      <span>0%</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 30px;">
+    <input id="goal" type="number" placeholder="Goal $" />
+    <input id="current" type="number" placeholder="Current $" />
+    <button onclick="updateTracker()">Update</button>
+  </div>
+
+  <script>
+    function updateTracker() {
+      const goal = parseFloat(document.getElementById('goal').value);
+      const current = parseFloat(document.getElementById('current').value);
+      const fill = document.getElementById('fill');
+
+      if (!goal || goal <= 0 || current < 0) {
+        alert("Please enter valid numbers.");
+        return;
+      }
+
+      let percent = Math.min((current / goal) * 100, 100);
+      fill.style.height = percent + '%';
+    }
+  </script>
+</body>
+</html>
